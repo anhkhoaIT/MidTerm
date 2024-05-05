@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  product_management:
+    container_name: SpringCommerce
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_DB=SpringCommerce
+      - POSTGRES_USER=khoa
+      - POSTGRES_PASSWORD=abc123
+    ports:
+      - '5432:5432'
+volumes:
+  db:
+    driver: local
