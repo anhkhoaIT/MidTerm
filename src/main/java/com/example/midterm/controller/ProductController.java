@@ -84,23 +84,6 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @GetMapping("/products?category={category}")
-    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable String category) {
-        //convert category lowercase
-        category = category.toLowerCase();
-        List<Product> products = productService.getProductsByCategory(category);
-        if (products == null) {
-            throw new ProductNotFoundException("Products not found");
-        }
-        return new ResponseEntity<>(products, HttpStatus.OK);
-
-    }
-
-    @GetMapping("/addProduct")
-    public String addProduct() {
-        return "add-product";
-    }
-
     @PostMapping("/addProduct")
     public String addProduct(@RequestParam String name, @RequestParam String category, @RequestParam double price, @RequestParam String brand, @RequestParam String color, @RequestParam String image) {
         Product product = new Product(name, category, price, brand, color, image);
@@ -113,4 +96,11 @@ public class ProductController {
         productRepository.deleteById(id);
         return "redirect:/";
     }
+
+    @GetMapping("/addProduct")
+    public String addProduct() {
+        return "add-product";
+    }
+
+
 }
